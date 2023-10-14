@@ -61,10 +61,10 @@ export default async function OrderPage({ params: { orderId } }: { params: { ord
 
         <p className='text-sm'>Created At: {new Date(order?.created_at!).toLocaleString()}</p>
       </div>
-      <div className='flex flex-col flex-1 gap-2'>
-        <p className='text-sm text-center font-bold'>
-          {order?.buyer_id == session?.user.id ? 'Seller' : 'Buyer'} Information
-        </p>
+      <p className='text-sm text-center font-bold'>
+        {order?.buyer_id == session?.user.id ? 'Seller' : 'Buyer'} Information
+      </p>
+      <div className='grid grid-cols-2 gap-2'>
         {
           // If user is buyer
           order?.buyer_id === session?.user.id &&
@@ -89,7 +89,7 @@ export default async function OrderPage({ params: { orderId } }: { params: { ord
                 {info}:{' '}
                 {
                   // @ts-ignore
-                  order?.buyer[info]
+                  order?.buyer[info] ?? '未填写'
                 }
               </p>
             ))

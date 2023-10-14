@@ -20,6 +20,8 @@ export default async function MyPage() {
   const { data: orders, error: ordersError } = await supabase
     .from('orders')
     .select(`*, seller:seller_id(*), sell:sell_id(*, book:book_id(*))`)
+    // Make sure display the latest orders in head
+    .order('created_at', { ascending: false })
     // CREATED < DONE, asc is true
     .order('status', { ascending: true })
 
@@ -112,7 +114,8 @@ export default async function MyPage() {
       <table>
         <thead className='text-left'>
           <tr>
-            <th>Book Title</th>
+            <th>Type</th>
+            <th>Book</th>
             <th>Price</th>
             <th>Created At</th>
             <th>Status</th>
@@ -122,6 +125,7 @@ export default async function MyPage() {
         <tbody>
           {orders?.map((order) => (
             <tr key={order.id}>
+              <td className={`${order.buyer_id === user?.id ? 'text-black' : 'text-gray-500 font-bold'}`}>{order.buyer_id === user?.id ? 'Buy' : 'Sell'}</td>
               <td>
                 {
                   // This is a supabase inner error, just ignore it
