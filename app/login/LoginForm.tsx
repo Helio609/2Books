@@ -40,7 +40,7 @@ export default function LoginForm() {
     <>
       <form action={formAction} className='p-2 flex items-center rounded-full border-2 border-black border-dashed'>
         EMAIL:
-        <input name='email' className='outline-none w-[18rem]' type='email' required />
+        <input name='email' className='outline-none w-[12rem]' type='email' required />
         <LoginButton state={state} />
       </form>
       {state.error && <p>Error: {state.error}，请稍后重试。</p>}
