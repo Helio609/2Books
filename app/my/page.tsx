@@ -20,6 +20,8 @@ export default async function MyPage() {
   const { data: orders, error: ordersError } = await supabase
     .from('orders')
     .select(`*, seller:seller_id(*), sell:sell_id(*, book:book_id(*))`)
+    // CREATED < DONE, asc is true
+    .order('status', { ascending: true })
 
   // TODO: Handle the error
 
@@ -134,7 +136,9 @@ export default async function MyPage() {
                 }
               </td>
               <td>{new Date(order.created_at).toLocaleString()}</td>
-              <td>{order.status}</td>
+              <td className={`${order.status === 'CREATED' ? 'text-red-300 font-bold' : 'text-green-300'}`}>
+                {order.status}
+              </td>
               <td className='text-center'>
                 <Link href={`/order/${order.id}`} className='underline hover:text-gray-500'>
                   Look

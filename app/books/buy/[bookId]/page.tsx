@@ -7,8 +7,24 @@ import BuyForm from './BuyForm'
 export default async function BookSellPage({ params: { bookId } }: { params: { bookId: string } }) {
   const supabase = createServerComponentClient<Database>({ cookies })
 
+  const {
+    data: { session },
+    error: sessionError,
+  } = await supabase.auth.getSession()
+
+  // TODO: Handle session error
+
   const { data: book, error: bookError } = await supabase.from('books').select().eq('id', bookId).single()
-  const { data: sells, error: sellError } = await supabase.from('sells').select(`*, profiles(*)`).eq('book_id', bookId)
+  const { data: sells, error: sellError } = await supabase
+    .from('sells')
+    .select(`*, profiles(*)`)
+    // Make sure the book is in sell
+    .is('order_id', null)
+    .eq('book_id', bookId)
+    // Make sure the seller is not the user self
+    .not('seller_id', 'eq', session?.user.id!)
+    // From low price to high price
+    .order('price', { ascending: true })
 
   // TODO: Handle error
 
