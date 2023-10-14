@@ -1,12 +1,9 @@
 'use server'
 
-import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
-import { cookies, headers } from 'next/headers'
+import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 export const searchBookByIsbnAction = async (formData: FormData) => {
-  const host = headers().get('Host')
-
   const isbn = formData.get('isbn')?.toString().trim()
 
   if (!isbn || isbn.length === 0) {

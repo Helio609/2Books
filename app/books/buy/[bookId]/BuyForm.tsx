@@ -1,6 +1,6 @@
 'use client'
 
-import buyAction from '@/lib/actions/buyAction'
+import buyAction from '@/lib/actions/BuyAction'
 import { ShoppingCartIcon, ArrowPathIcon, CheckIcon } from '@heroicons/react/24/outline'
 
 // @ts-ignore

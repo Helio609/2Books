@@ -17,8 +17,8 @@ export const loginAction = async (prevState: any, formData: FormData) => {
   const res = await supabase.auth.signInWithOtp({
     email,
     options: {
-      // TODO: According to server url
-      emailRedirectTo: 'http://localhost:3000/auth/callback',
+      // According to server url, setup on supabase auth configuration
+      // emailRedirectTo: 'http://localhost:3000/auth/callback',
     },
   })
 
