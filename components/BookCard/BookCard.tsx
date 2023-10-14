@@ -4,6 +4,8 @@ import { cookies } from 'next/headers'
 import Image from 'next/image'
 import Link from 'next/link'
 
+export const dynamic = 'force-dynamic'
+
 export default async function BookCard({ bookId }: { bookId: string }) {
   const supabase = createServerComponentClient<Database>({ cookies })
   const { data: book, error } = await supabase.from('books').select(`*, sells(id)`).eq('id', bookId).single()
@@ -27,13 +29,15 @@ export default async function BookCard({ bookId }: { bookId: string }) {
       />
       <div className='flex flex-col justify-center overflow-hidden flex-1 space-y-2'>
         {book.sells.length == 0 && <p className='text-md text-center truncate'>《{book.title}》</p>}
-        {book.sells.length > 0 && <Link
-          href={`/books/buy/${book.id}`}
-          className='text-md text-center truncate text-blue-500'
-          aria-disabled={book.sells.length == 0}
-        >
-          《{book.title}》
-        </Link>}
+        {book.sells.length > 0 && (
+          <Link
+            href={`/books/buy/${book.id}`}
+            className='text-md text-center truncate text-blue-500'
+            aria-disabled={book.sells.length == 0}
+          >
+            《{book.title}》
+          </Link>
+        )}
         {book.subtitle != '' && <p className='text-sm text-center truncate'>- {book.subtitle}</p>}
         <p className='text-sm text-gray-500 truncate'>Author: &nbsp;&nbsp;&nbsp;{book.author}</p>
         <p className='text-sm text-gray-500 truncate'>Publisher: {book.publisher}</p>

@@ -1,9 +1,11 @@
-import { updateProfileAction } from '@/lib/actions/UpdateProfile'
+import { updateProfileAction } from '@/lib/actions/UpdateProfileAction'
 import { Database } from '@/lib/supabase.types'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
 import UpdateProfileButton from './UpdateProfileButton'
+
+export const dynamic = 'force-dynamic'
 
 export default async function MyPage() {
   const supabase = createServerComponentClient<Database>({ cookies })
@@ -125,7 +127,9 @@ export default async function MyPage() {
         <tbody>
           {orders?.map((order) => (
             <tr key={order.id}>
-              <td className={`${order.buyer_id === user?.id ? 'text-black' : 'text-gray-500 font-bold'}`}>{order.buyer_id === user?.id ? 'Buy' : 'Sell'}</td>
+              <td className={`${order.buyer_id === user?.id ? 'text-black' : 'text-gray-500 font-bold'}`}>
+                {order.buyer_id === user?.id ? 'Buy' : 'Sell'}
+              </td>
               <td>
                 {
                   // This is a supabase inner error, just ignore it

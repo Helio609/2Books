@@ -4,6 +4,8 @@ import { cookies } from 'next/headers'
 import Image from 'next/image'
 import BuyForm from './BuyForm'
 
+export const dynamic = 'force-dynamic'
+
 export default async function BookSellPage({ params: { bookId } }: { params: { bookId: string } }) {
   const supabase = createServerComponentClient<Database>({ cookies })
 

@@ -4,6 +4,8 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
+export const dynamic = 'force-dynamic'
+
 export default async function BookPage(request: { searchParams: any }) {
   if (!request.searchParams.page || !request.searchParams.count) {
     redirect('/books?page=1&count=10&available=true')

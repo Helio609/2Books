@@ -5,6 +5,8 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import SellForm from './SellForm'
 
+export const dynamic = 'force-dynamic'
+
 export default function SellPage(request: { searchParams: { isbn?: string; bookId?: string; error?: string } }) {
   const error = request.searchParams.error
   const isbn = request.searchParams.isbn
