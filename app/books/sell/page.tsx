@@ -37,7 +37,8 @@ export default function SellPage(request: { searchParams: { isbn?: string; bookI
       {bookId && (
         <div className='mt-2 flex flex-col justify-center mx-auto'>
           <BookCard bookId={bookId} />
-          <SellForm />
+          {/* SellForm should been updated when bookId is changed */}
+          <SellForm key={bookId} />
         </div>
       )}
     </>
