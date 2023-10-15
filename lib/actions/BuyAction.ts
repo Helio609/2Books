@@ -67,9 +67,6 @@ export default async function buyAction(prevState: any, formData: FormData) {
   }
 
   // Notify the seller with an email if seller's notify email is not null
-  // TODO: Complete the mail send part
-
-  console.log(sellerEmail)
   if (sellerEmail) {
     mailer
       .sendMail({
@@ -77,7 +74,7 @@ export default async function buyAction(prevState: any, formData: FormData) {
         to: sellerEmail,
         subject: `您的书本被预定了，请前往查看！`,
         html: `
-        <a href="${getURL}/order/${order.id}">点击查看</a>
+        <a href="${getURL()}/order/${order.id}">点击查看</a>
       `,
       })
       .then((e: any) => console.log(e))
