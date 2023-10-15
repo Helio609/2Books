@@ -41,7 +41,7 @@ export default async function BookPage(request: { searchParams: any }) {
       </div>
       {books.length > 0 && (
         <>
-          <div className='mt-2 flex flex-1 flex-wrap gap-4'>
+          <div className='mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-2 gap-4'>
             {books?.map((book) => (
               <BookCard key={book.id} bookId={book.id} />
             ))}

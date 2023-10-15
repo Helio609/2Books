@@ -33,7 +33,7 @@ export default async function MyPage() {
     <>
       <p className='text-2xl'>Profile</p>
       <form action={updateProfileAction} className='flex flex-col justify-center space-y-2'>
-        <div className='grid grid-cols-2 gap-2'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 gap-2'>
           <span className='p-2 rounded-lg border-2 border-black border-dashed'>
             University:{' '}
             <input

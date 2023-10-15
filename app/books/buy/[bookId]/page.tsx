@@ -58,7 +58,7 @@ export default async function BookSellPage({ params: { bookId } }: { params: { b
             key={sell.id}
             className='p-2 flex justify-between items-center rounded-lg border-2 border-black border-dashed'
           >
-            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4'>
               <p>University: {sell.profiles?.university ?? '未填写'}</p>
               <p>Campus: {sell.profiles?.campus ?? '未填写'}</p>
               <p>Academy:{sell.profiles?.academy ?? '未填写'}</p>
