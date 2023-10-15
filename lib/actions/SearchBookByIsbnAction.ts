@@ -1,7 +1,7 @@
 'use server'
 
-import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { getURL } from '../utils'
 
 export const searchBookByIsbnAction = async (formData: FormData) => {
   const isbn = formData.get('isbn')?.toString().trim()
@@ -11,7 +11,7 @@ export const searchBookByIsbnAction = async (formData: FormData) => {
   }
 
   // Request the Juhe isbn api
-  const res = await fetch(`http://${headers().get('Host')}/api/isbn/${isbn}`)
+  const res = await fetch(`${getURL}/api/isbn/${isbn}`)
   if (res.status != 200) {
     redirect('/books/sell?error=Internal error')
   }

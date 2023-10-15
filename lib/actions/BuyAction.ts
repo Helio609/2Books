@@ -2,17 +2,16 @@
 
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { createClient } from '@supabase/supabase-js'
-import { cookies, headers } from 'next/headers'
-import { Database } from '../supabase.types'
+import { cookies } from 'next/headers'
 import { mailer } from '../mailer'
+import { Database } from '../supabase.types'
+import { getURL } from '../utils'
 
 export default async function buyAction(prevState: any, formData: FormData) {
   // Because some sql needs high permissions like update and delete
   const supabase = createClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!)
   // Using the client to get the user id
   const supabaseByCookie = createServerComponentClient<Database>({ cookies: cookies })
-
-  const host = headers().get('Host')
 
   const {
     data: { session },
@@ -72,14 +71,17 @@ export default async function buyAction(prevState: any, formData: FormData) {
 
   console.log(sellerEmail)
   if (sellerEmail) {
-    mailer.sendMail({
-      from: process.env.SMTP_USER,
-      to: sellerEmail,
-      subject: `您的书本被预定了，请前往查看！`,
-      html: `
-        <a href="http://${host}/order/${order.id}">点击查看</a>
-      `
-    }).then((e: any) => console.log(e)).catch((e: any) => console.log(e))
+    mailer
+      .sendMail({
+        from: process.env.SMTP_USER,
+        to: sellerEmail,
+        subject: `您的书本被预定了，请前往查看！`,
+        html: `
+        <a href="${getURL}/order/${order.id}">点击查看</a>
+      `,
+      })
+      .then((e: any) => console.log(e))
+      .catch((e: any) => console.log(e))
   }
 
   return { done: true }

@@ -2,6 +2,7 @@
 
 import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
+import { getURL } from '../utils'
 
 export const loginAction = async (prevState: any, formData: FormData) => {
   const email = formData.get('email')?.toString()
@@ -18,7 +19,7 @@ export const loginAction = async (prevState: any, formData: FormData) => {
     email,
     options: {
       // According to server url, setup on supabase auth configuration
-      // emailRedirectTo: 'http://localhost:3000/auth/callback',
+      emailRedirectTo: `${getURL()}/auth/callback`,
     },
   })
 
