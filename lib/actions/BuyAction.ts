@@ -66,20 +66,15 @@ export default async function buyAction(prevState: any, formData: FormData) {
     return { error: 'Book has been purchased by one user already', done: false }
   }
 
-  // Notify the seller with an email if seller's notify email is not null
-  if (sellerEmail) {
-    mailer
-      .sendMail({
-        from: process.env.SMTP_USER,
-        to: sellerEmail,
-        subject: `您的书本被预定了，请前往查看！`,
-        html: `
-        <a href="${getURL()}/order/${order.id}">点击查看</a>
-      `,
-      })
-      .then((e: any) => console.log(e))
-      .catch((e: any) => console.log(e))
-  }
+  // Notify the seller with an email
+  await mailer.sendMail({
+    from: process.env.SMTP_USER,
+    to: sellerEmail ?? session.user.email,
+    subject: `您的书本被预定了，请前往查看！`,
+    html: `
+          <a href="${getURL()}/order/${order.id}">点击查看</a>
+        `,
+  })
 
   return { done: true }
 }
