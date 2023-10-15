@@ -11,3 +11,7 @@ export const getURL = () => {
   // url = url.charAt(url.length - 1) === '/' ? url : `${url}/`
   return url
 }
+
+export const isEduPostfix = (email: string) => {
+  return /edu.cn$/.test(email)
+}

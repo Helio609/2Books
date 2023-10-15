@@ -1187,7 +1187,7 @@ packages:
       is-string: registry.npmmirror.com/is-string@1.0.7
       is-typed-array: registry.npmmirror.com/is-typed-array@1.1.12
       is-weakref: registry.npmmirror.com/is-weakref@1.0.2
-      object-inspect: registry.npmmirror.com/object-inspect@1.12.3
+      object-inspect: registry.npmmirror.com/object-inspect@1.13.0
       object-keys: registry.npmmirror.com/object-keys@1.1.1
       object.assign: registry.npmmirror.com/object.assign@4.1.4
       regexp.prototype.flags: registry.npmmirror.com/regexp.prototype.flags@1.5.1
@@ -2557,10 +2557,10 @@ packages:
     engines: {node: '>= 6'}
     dev: true
 
-  registry.npmmirror.com/object-inspect@1.12.3:
-    resolution: {integrity: sha512-geUvdk7c+eizMNUDkRpW1wJwgfOiOeHbxBR/hLXK1aT6zmVSO0jsQcs7fj6MGw89jC/cjGfLcNOrtMYtGqm81g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/object-inspect/-/object-inspect-1.12.3.tgz}
+  registry.npmmirror.com/object-inspect@1.13.0:
+    resolution: {integrity: sha512-HQ4J+ic8hKrgIt3mqk6cVOVrW2ozL4KdvHlqpBv9vDYWx9ysAgENAdvy4FoGF+KFdhR7nQTNm5J0ctAeOwn+3g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/object-inspect/-/object-inspect-1.13.0.tgz}
     name: object-inspect
-    version: 1.12.3
+    version: 1.13.0
     dev: true
 
   registry.npmmirror.com/object-keys@1.1.1:
@@ -3083,7 +3083,7 @@ packages:
     dependencies:
       call-bind: registry.npmmirror.com/call-bind@1.0.2
       get-intrinsic: registry.npmmirror.com/get-intrinsic@1.2.1
-      object-inspect: registry.npmmirror.com/object-inspect@1.12.3
+      object-inspect: registry.npmmirror.com/object-inspect@1.13.0
     dev: true
 
   registry.npmmirror.com/slash@3.0.0:

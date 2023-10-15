@@ -2,6 +2,8 @@ import { Footer, Header } from '@/components'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
+import { Suspense } from 'react'
+import Loading from './loading'
 
 // Chinese font declare
 const chineseFont = localFont({
@@ -31,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className='flex flex-col h-[calc(100dvh)]'>
           <Header />
           <main className='overflow-y-scroll container mx-auto p-2 flex flex-col flex-1 rounded-xl border-2 border-black border-dashed'>
-            {children}
+            <Suspense fallback={<Loading />}>{children}</Suspense>
           </main>
           <Footer />
         </div>

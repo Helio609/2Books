@@ -2,7 +2,7 @@
 
 import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
-import { getURL } from '../utils'
+import { getURL, isEduPostfix } from '../utils'
 
 export const loginAction = async (prevState: any, formData: FormData) => {
   const email = formData.get('email')?.toString()
@@ -11,6 +11,11 @@ export const loginAction = async (prevState: any, formData: FormData) => {
   if (!email || email.length === 0 || email.toString().trim() === '') {
     return { error: '请填写正确的邮箱', done: false }
   }
+  
+  // TODO: Enable it in future
+  // if (!isEduPostfix(email)) {
+  //   return { error: '只允许@*.edu.cn用户使用', done: false }
+  // }
 
   const supabase = createServerActionClient({ cookies })
 
