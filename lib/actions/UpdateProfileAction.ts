@@ -28,7 +28,7 @@ export const updateProfileAction = async (formData: FormData) => {
     .update({
       university: university,
       campus: campus,
-      grade: Number(grade),
+      grade: Number(grade) == 0 ? null : Number(grade),
       academy: academy,
       notify_email: notifyEmail,
       address: address,
@@ -36,13 +36,10 @@ export const updateProfileAction = async (formData: FormData) => {
       gender: gender,
     })
     .eq('id', session?.user.id!)
-  
+
   if (error) {
     return { error: error.message, done: false }
   }
-
-  // Make sure all the field is up to date
-  revalidatePath('/my')
 
   return { done: true }
 }

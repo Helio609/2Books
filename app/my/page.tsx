@@ -57,7 +57,9 @@ export default async function MyPage() {
             <input
               name='grade'
               defaultValue={profile?.grade ?? ''}
-              type='text'
+              type='number'
+              min={2000}
+              max={2100}
               className='outline-none border-b-2 border-black border-dashed'
             />
           </span>
@@ -75,7 +77,7 @@ export default async function MyPage() {
             <input
               name='notify_email'
               defaultValue={profile?.notify_email ?? ''}
-              type='text'
+              type='email'
               className='outline-none border-b-2 border-black border-dashed'
             />
           </span>
