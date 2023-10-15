@@ -26,7 +26,7 @@ export default async function BookCard({ bookId }: { bookId: string }) {
         src={book.image}
         height={144}
         width={122}
-        alt={`book for ${book.id}`}
+        alt={book.title ?? book.subtitle ?? `Book for ${book.isbn10}`}
       />
       <div className='flex flex-col justify-center overflow-hidden flex-1 space-y-2'>
         {book.sells.length == 0 && <p className='text-md text-center truncate'>《{book.title}》</p>}
@@ -39,7 +39,7 @@ export default async function BookCard({ bookId }: { bookId: string }) {
             《{book.title}》
           </Link>
         )}
-        {book.subtitle != '' && <p className='text-sm text-center truncate'>- {book.subtitle}</p>}
+        {book.subtitle != '' && <p className='text-sm text-center truncate'>{book.subtitle}</p>}
         <p className='text-sm text-gray-500 truncate'>Author: &nbsp;&nbsp;&nbsp;{book.author}</p>
         <p className='text-sm text-gray-500 truncate'>Publisher: {book.publisher}</p>
         <p className='text-sm text-gray-500 truncate'>Pubdate: &nbsp;&nbsp;{book.pubdate}</p>

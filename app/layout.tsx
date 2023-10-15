@@ -28,9 +28,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='zh-CN' className={chineseFont.className}>
       <body>
-        <div className='flex flex-col h-screen'>
+        <div className='flex flex-col h-[calc(100dvh)]'>
           <Header />
-          <main className='container mx-auto p-2 flex flex-col flex-1 rounded-xl border-2 border-black border-dashed'>
+          <main className='overflow-y-scroll container mx-auto p-2 flex flex-col flex-1 rounded-xl border-2 border-black border-dashed'>
             {children}
           </main>
           <Footer />

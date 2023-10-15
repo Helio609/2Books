@@ -30,17 +30,19 @@ export default function SearchBar() {
   }
 
   return (
-    <div className='flex items-center space-x-2'>
-      Search:
-      {/* TODO: Replace with a auto complete and display */}
-      <input ref={searchRef} className='rounded-md outline-0 border-2 border-gray-500 border-dashed' type='text' />
-      <button
-        onClick={() => {
-          navigateTo(searchRef.current?.value)
-        }}
-      >
-        <MagnifyingGlassIcon className='w-7 h-7 p-1 rounded-full border-2 border-black border-dashed' />
-      </button>
+    <div className='flex flex-col sm:flex-row gap-2'>
+      <div className='flex items-center space-x-2'>
+        Search:
+        {/* TODO: Replace with a auto complete and display */}
+        <input ref={searchRef} className='rounded-md outline-0 border-2 border-gray-500 border-dashed w-full' type='text' />
+        <button
+          onClick={() => {
+            navigateTo(searchRef.current?.value)
+          }}
+        >
+          <MagnifyingGlassIcon className='w-7 h-7 p-1 rounded-full border-2 border-black border-dashed' />
+        </button>
+      </div>
       <div className='flex items-center'>
         <input
           type='checkbox'
