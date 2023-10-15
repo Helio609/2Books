@@ -19,7 +19,6 @@ export default async function BookCard({ bookId }: { bookId: string }) {
   }
 
   return (
-    // TODO: Fixing the layout!!!
     <div className='flex space-x-2 rounded-xl shadow-md border-2 border-black border-dashed w-full max-w-[30rem] h-[10rem]'>
       <Image
         className='rounded-xl border-r-2 border-black border-dashed'
