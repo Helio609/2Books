@@ -68,6 +68,9 @@ export default async function OrderPage({ params: { orderId } }: { params: { ord
       </p>
       <div className='grid grid-cols-2 gap-2'>
         {
+          // TODO: Simplify the render
+        }
+        {
           // If user is buyer
           order?.buyer_id === session?.user.id &&
             // @ts-ignore
@@ -83,7 +86,6 @@ export default async function OrderPage({ params: { orderId } }: { params: { ord
         }
         {
           // If user is seller
-          // TODO: Providing some actions like notify buyer or change the order status(like change status to DONE)
           order?.seller_id === session?.user.id &&
             // @ts-ignore
             Object.keys(order?.buyer).map((info, i) => (
@@ -95,6 +97,12 @@ export default async function OrderPage({ params: { orderId } }: { params: { ord
                 }
               </p>
             ))
+        }
+        {
+          // TODO: Seller could cancel the order
+          //              modify status to ACCEPTED, so the buyer can not cancel the order easily
+          //              modify status to DONE
+          //       Buyer could cancel the order, when status is not DONE
         }
       </div>
       <Link
