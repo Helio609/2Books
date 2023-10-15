@@ -3,6 +3,9 @@ import { Database } from '@/lib/supabase.types'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { Suspense } from 'react'
+import Loading from '../loading'
+import LoadingBookCard from '@/components/BookCard/LoadingBookCard'
 
 export const dynamic = 'force-dynamic'
 
@@ -39,20 +42,24 @@ export default async function BookPage(request: { searchParams: any }) {
         <SearchBar />
         {books.length} Item(s)
       </div>
-      {books.length > 0 && (
-        <>
-          <div className='flex flex-1'>
-            <div className='mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-2 gap-4'>
-              {books?.map((book) => (
-                <BookCard key={book.id} bookId={book.id} />
-              ))}
+      <Suspense fallback={<Loading />}>
+        {books.length > 0 && (
+          <>
+            <div className='flex flex-1'>
+              <div className='mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-2 gap-4'>
+                {books?.map((book) => (
+                  <Suspense key={book.id} fallback={<LoadingBookCard />}>
+                    <BookCard key={book.id} bookId={book.id} />
+                  </Suspense>
+                ))}
+              </div>
             </div>
-          </div>
-          <div className='flex m-2 justify-center'>
-            <Pagination more={books.length == count} />
-          </div>
-        </>
-      )}
+            <div className='flex m-2 justify-center'>
+              <Pagination more={books.length == count} />
+            </div>
+          </>
+        )}
+      </Suspense>
       {books.length === 0 && <>Currently no books in selling!</>}
     </>
   )
