@@ -11,6 +11,8 @@ export default function SearchBar() {
 
   const router = useRouter()
 
+  const available = searchParams.get('available') && searchParams.get('available') == 'true' ? true : false
+
   const navigateTo = (search?: string) => {
     if (search) {
       searchParams.set('search', search)
@@ -34,7 +36,11 @@ export default function SearchBar() {
       <div className='flex items-center space-x-2'>
         Search:
         {/* TODO: Replace with a auto complete and display */}
-        <input ref={searchRef} className='rounded-md outline-0 border-2 border-gray-500 border-dashed w-full' type='text' />
+        <input
+          ref={searchRef}
+          className='rounded-md outline-0 border-2 border-gray-500 border-dashed w-full'
+          type='text'
+        />
         <button
           onClick={() => {
             navigateTo(searchRef.current?.value)
@@ -46,7 +52,7 @@ export default function SearchBar() {
       <div className='flex items-center'>
         <input
           type='checkbox'
-          defaultChecked={true}
+          defaultChecked={available}
           onChange={(e) => {
             onAvailableChange(e.target.checked)
           }}

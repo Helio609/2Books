@@ -40,7 +40,7 @@ export default async function BookPage(request: { searchParams: any }) {
     <>
       <div className='flex flex-col sm:flex-row space-x-2 justify-between items-center p-2 rounded-xl border-2 border-black border-dashed'>
         <SearchBar />
-        {books.length} Item(s)
+        <Suspense fallback={<Loading />}>{books.length} Item(s)</Suspense>
       </div>
       <Suspense fallback={<Loading />}>
         {books.length > 0 && (
@@ -59,8 +59,8 @@ export default async function BookPage(request: { searchParams: any }) {
             </div>
           </>
         )}
+        {books.length === 0 && <>Currently no books in selling!</>}
       </Suspense>
-      {books.length === 0 && <>Currently no books in selling!</>}
     </>
   )
 }
