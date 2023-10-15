@@ -36,8 +36,6 @@ export default async function sellAction(prevState: any, formData: FormData) {
     .select()
     .single()
   
-  console.log(sell)
-
   if (sellError) {
     return { error: sellError.message, done: false }
   }
