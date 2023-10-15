@@ -1,6 +1,7 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
+import { LogoutButton } from '..'
 
 export const dynamic = 'force-dynamic'
 
@@ -34,9 +35,7 @@ export default async function Header() {
         <Link className='hover:text-gray-500' href='/my'>
           个人中心
         </Link>
-        <Link className='hover:text-gray-500' href='/auth/signout'>
-          退出登录
-        </Link>
+        <LogoutButton />
       </div>
     </div>
   )
