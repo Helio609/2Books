@@ -30,38 +30,41 @@ export default async function OrderPage({ params: { orderId } }: { params: { ord
     <>
       <div className='flex flex-col gap-2'>
         <p className='text-sm font-bold text-center'>Order for {order?.id}</p>
-        <Link
-          href={`/books/buy/${
-            // @ts-ignore
-            order?.sell.book.id
-          }`}
-          className='text-sm underline hover:text-gray-500'
-        >
-          Book Name:&nbsp;
-          {
-            // Supabase type error
-            // @ts-ignore
-            order?.sell?.book.title
-          }
-        </Link>
 
-        <p className='text-sm'>
-          Origin Price: ￥
-          {
-            // @ts-ignore
-            order?.sell.book.price
-          }
-        </p>
+        <div className='grid grid-cols-2 gap-2'>
+          <Link
+            href={`/books/buy/${
+              // @ts-ignore
+              order?.sell.book.id
+            }`}
+            className='text-sm underline hover:text-gray-500'
+          >
+            Book Name:&nbsp;
+            {
+              // Supabase type error
+              // @ts-ignore
+              order?.sell?.book.title
+            }
+          </Link>
 
-        <p className='text-sm'>
-          Purchased Price: ￥
-          {
-            // @ts-ignore
-            order?.sell.price
-          }
-        </p>
+          <p className='text-sm'>Created At: {new Date(order?.created_at!).toLocaleString()}</p>
 
-        <p className='text-sm'>Created At: {new Date(order?.created_at!).toLocaleString()}</p>
+          <p className='text-sm'>
+            Origin Price: ￥
+            {
+              // @ts-ignore
+              order?.sell.book.price
+            }
+          </p>
+
+          <p className='text-sm'>
+            Purchased Price: ￥
+            {
+              // @ts-ignore
+              order?.sell.price
+            }
+          </p>
+        </div>
       </div>
       <p className='text-sm text-center font-bold'>
         {order?.buyer_id == session?.user.id ? 'Seller' : 'Buyer'} Information
@@ -103,11 +106,55 @@ export default async function OrderPage({ params: { orderId } }: { params: { ord
           //              modify status to ACCEPTED, so the buyer can not cancel the order easily
           //              modify status to DONE
           //       Buyer could cancel the order, when status is not DONE
+          order?.seller_id === session?.user.id && order?.status !== 'CANCELED' && (
+            <div className='flex gap-2'>
+              Seller Actions:
+              {order?.status === 'CREATED' && (
+                <>
+                  {
+                    // TODO: Order status is CREATED, seller could accept or cancel the order
+                  }
+                </>
+              )}
+              {order?.status === 'ACCEPTED' && (
+                <>
+                  {
+                    // TODO: Order status is ACCEPTED, seller should give the book to buyer, and set status to DELIVERED
+                  }
+                </>
+              )}
+            </div>
+          )
+        }
+        {
+          // TODO: Seller could cancel the order
+          //              modify status to ACCEPTED, so the buyer can not cancel the order easily
+          //              modify status to DONE
+          //       Buyer could cancel the order, when status is not DONE
+          order?.buyer_id === session?.user.id && order?.status !== 'CANCELED' && (
+            <div className='flex gap-2'>
+              Buyer Actions:
+              {order?.status === 'CREATED' && (
+                <>
+                  {
+                    // TODO: Order status is CREATED, buyer could cancel the order
+                  }
+                </>
+              )}
+              {order?.status === 'DELIVERED' && (
+                <>
+                  {
+                    // TODO: Order status is DELIVERED, seller could set status to DONE
+                  }
+                </>
+              )}
+            </div>
+          )
         }
       </div>
       <Link
         href='/my'
-        className='m-2 shadow-md bg-gradient-to-b from-white to-gray-200 rounded-lg border-2 border-black border-dashed text-center'
+        className='mt-2 shadow-md bg-gradient-to-b from-white to-gray-200 rounded-lg border-2 border-black border-dashed text-center'
       >
         Go back
       </Link>
