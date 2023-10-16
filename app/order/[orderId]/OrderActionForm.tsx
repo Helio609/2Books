@@ -1,6 +1,7 @@
 'use client'
 
 import { updateOrderStatusAction } from '@/lib/actions/UpdateOrderStatusAction'
+import { ArrowPathIcon } from '@heroicons/react/24/outline'
 
 // @ts-ignore
 import { experimental_useFormState as useFormState } from 'react-dom'
@@ -14,6 +15,16 @@ const initialState = {
 }
 
 function OrderActionButton({ state, type }: { state: any; type: string }) {
+  const { pending } = useFormStatus()
+
+  if (pending) {
+    return (
+      <div className='px-2 shadow-md bg-gradient-to-b from-white to-gray-200 rounded-lg border-2 border-black border-dashed'>
+        <ArrowPathIcon className='w-6 h-6 animate-spin' />
+      </div>
+    )
+  }
+
   return (
     <button
       type='submit'
