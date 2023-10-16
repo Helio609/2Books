@@ -2,6 +2,7 @@ import { Database } from '@/lib/supabase.types'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
+import ActionButton from './OrderActionForm'
 
 export const dynamic = 'force-dynamic'
 
@@ -101,60 +102,67 @@ export default async function OrderPage({ params: { orderId } }: { params: { ord
               </p>
             ))
         }
-        {
-          // TODO: Seller could cancel the order
-          //              modify status to ACCEPTED, so the buyer can not cancel the order easily
-          //              modify status to DONE
-          //       Buyer could cancel the order, when status is not DONE
-          order?.seller_id === session?.user.id && order?.status !== 'CANCELED' && (
-            <div className='flex gap-2'>
-              Seller Actions:
-              {order?.status === 'CREATED' && (
-                <>
-                  {
-                    // TODO: Order status is CREATED, seller could accept or cancel the order
-                  }
-                </>
-              )}
-              {order?.status === 'ACCEPTED' && (
-                <>
-                  {
-                    // TODO: Order status is ACCEPTED, seller should give the book to buyer, and set status to DELIVERED
-                  }
-                </>
-              )}
-            </div>
-          )
-        }
-        {
-          // TODO: Seller could cancel the order
-          //              modify status to ACCEPTED, so the buyer can not cancel the order easily
-          //              modify status to DONE
-          //       Buyer could cancel the order, when status is not DONE
-          order?.buyer_id === session?.user.id && order?.status !== 'CANCELED' && (
-            <div className='flex gap-2'>
-              Buyer Actions:
-              {order?.status === 'CREATED' && (
-                <>
-                  {
-                    // TODO: Order status is CREATED, buyer could cancel the order
-                  }
-                </>
-              )}
-              {order?.status === 'DELIVERED' && (
-                <>
-                  {
-                    // TODO: Order status is DELIVERED, seller could set status to DONE
-                  }
-                </>
-              )}
-            </div>
-          )
-        }
+        <div className='flex space-x-2'>
+          {
+            // TODO: Seller could cancel the order
+            //              modify status to ACCEPTED, so the buyer can not cancel the order easily
+            //              modify status to DONE
+            //       Buyer could cancel the order, when status is not DONE
+            order?.seller_id === session?.user.id && order?.status !== 'CANCELED' && order?.status !== 'DELIVERIED' && (
+              <>
+                <p className='whitespace-nowrap'>Seller Actions:</p>
+                {order?.status === 'CREATED' && (
+                  <>
+                    {
+                      // TODO: Order status is CREATED, seller could accept or cancel the order
+                    }
+                    <ActionButton type='CANCELED' orderId={orderId} />
+                    <ActionButton type='ACCEPTED' orderId={orderId} />
+                  </>
+                )}
+                {order?.status === 'ACCEPTED' && (
+                  <>
+                    {
+                      // TODO: Order status is ACCEPTED, seller should give the book to buyer, and set status to DELIVERIED
+                    }
+                    <ActionButton type='DELIVERIED' orderId={orderId} />
+                  </>
+                )}
+              </>
+            )
+          }
+          {
+            // TODO: Seller could cancel the order
+            //              modify status to ACCEPT, so the buyer can not cancel the order easily
+            //              modify status to DONE
+            //       Buyer could cancel the order, when status is not DONE
+            order?.buyer_id === session?.user.id && order?.status !== 'CANCELED' && (
+              <>
+                <p className='whitespace-nowrap'>Buyer Actions:</p>
+                {order?.status === 'CREATED' && (
+                  <>
+                    {
+                      // TODO: Order status is CREATED, buyer could cancel the order
+                    }
+                    <ActionButton type='CANCELED' orderId={orderId} />
+                  </>
+                )}
+                {order?.status === 'DELIVERIED' && (
+                  <>
+                    {
+                      // TODO: Order status is DELIVERIED, seller could set status to DONE
+                    }
+                    <ActionButton type='DONE' orderId={orderId} />
+                  </>
+                )}
+              </>
+            )
+          }
+        </div>
       </div>
       <Link
         href='/my'
-        className='mt-2 shadow-md bg-gradient-to-b from-white to-gray-200 rounded-lg border-2 border-black border-dashed text-center'
+        className='hover:text-gray-500 mt-2 shadow-md bg-gradient-to-b from-white to-gray-200 rounded-lg border-2 border-black border-dashed text-center'
       >
         Go back
       </Link>
