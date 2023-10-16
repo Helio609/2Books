@@ -50,7 +50,7 @@ export default async function Home() {
               发布信息
             </Link>
           </div>
-          <p className='text-center'>技术支持: helio609.dev@outlook.com</p>
+          <p className='text-center'>技术支持: support@2books.top</p>
         </>
       )}
     </>
