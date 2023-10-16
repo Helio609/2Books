@@ -17,7 +17,13 @@ export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname
 
   // Check the pathname, if session is null, redirect user to login
-  if ((pathname.startsWith('/books') || pathname.startsWith('/my') || pathname.startsWith('/order')) && !session) {
+  if (
+    (pathname.startsWith('/books') ||
+      pathname.startsWith('/my') ||
+      pathname.startsWith('/order') ||
+      pathname.startsWith('/api/isbn')) &&
+    !session
+  ) {
     return NextResponse.redirect(`${getURL()}/login`)
   }
 
