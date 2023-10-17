@@ -3,7 +3,7 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { createClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
-import { mailer } from '../mailer'
+import { mailer, sendNotifyMail } from '../mailer'
 import { Database } from '../supabase.types'
 import { getURL } from '../utils'
 
@@ -66,14 +66,10 @@ export default async function buyAction(prevState: any, formData: FormData) {
     return { error: 'Book has been purchased by one user already', done: false }
   }
 
-  // Notify the seller with an email
-  await mailer.sendMail({
-    from: process.env.SMTP_USER,
-    to: sellerEmail ?? session.user.email,
-    subject: `您的书本被预定了，请前往查看！`,
-    html: `
-          <a href="${getURL()}/order/${order.id}">点击查看</a>
-        `,
+  // Notify with an email
+  await sendNotifyMail({
+    orderId: order.id,
+    type: 'CREATED',
   })
 
   return { done: true }

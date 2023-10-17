@@ -30,7 +30,23 @@ export default async function OrderPage({ params: { orderId } }: { params: { ord
   return (
     <>
       <div className='flex flex-col gap-2'>
-        <p className='text-sm font-bold text-center'>Order for {order?.id}</p>
+        <p className='text-md font-extrabold  text-center'>Order for {order?.id}</p>
+        <p
+          className={`text-sm font-bold text-center ${
+            order?.status === 'CREATED'
+              ? 'text-red-500'
+              : order?.status === 'ACCEPTED'
+              ? 'text-green-300'
+              : order?.status === 'CANCELED'
+              ? 'text-gray-500'
+              : order?.status === 'DELIVERED'
+              ? 'text-orange-500'
+              : ''
+          }
+        }`}
+        >
+          {order?.status}
+        </p>
 
         <div className='grid grid-cols-2 gap-2'>
           <Link

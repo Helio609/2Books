@@ -5,6 +5,7 @@ import { cookies } from 'next/headers'
 import { Database } from '../supabase.types'
 import { createClient } from '@supabase/supabase-js'
 import { revalidatePath } from 'next/cache'
+import { sendNotifyMail } from '../mailer'
 
 export const updateOrderStatusAction = async (prevState: any, formData: FormData) => {
   const supabaseByCookie = createServerActionClient<Database>({ cookies })
@@ -45,6 +46,8 @@ export const updateOrderStatusAction = async (prevState: any, formData: FormData
   // TODO: Sending mail to notify the seller and buyer
 
   revalidatePath('/')
+
+  await sendNotifyMail({ orderId, type })
 
   return { done: true }
 }
