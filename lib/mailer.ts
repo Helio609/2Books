@@ -97,8 +97,8 @@ const sendNotifyMail = async ({
     }
   }
 
-  await mailer.sendMail(sellerMailOptions)
-  await mailer.sendMail(buyerMailOptions)
+  // Speed up! Notice that we use allSettled, for reason of this step will never throw an exception
+  await Promise.allSettled([mailer.sendMail(sellerMailOptions), mailer.sendMail(buyerMailOptions)])
 }
 
 export { mailer, sendNotifyMail }
