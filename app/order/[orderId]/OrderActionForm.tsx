@@ -39,7 +39,7 @@ export default function OrderActionForm({
   type,
   orderId,
 }: {
-  type: 'CANCELED' | 'ACCEPTED' | 'DONE' | 'DELIVERIED'
+  type: 'CANCELED' | 'ACCEPTED' | 'DONE' | 'DELIVERED'
   orderId: string
 }) {
   const [state, formAction] = useFormState(updateOrderStatusAction, initialState)

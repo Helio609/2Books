@@ -108,7 +108,7 @@ export default async function OrderPage({ params: { orderId } }: { params: { ord
             //              modify status to ACCEPTED, so the buyer can not cancel the order easily
             //              modify status to DONE
             //       Buyer could cancel the order, when status is not DONE
-            order?.seller_id === session?.user.id && order?.status !== 'CANCELED' && order?.status !== 'DELIVERIED' && (
+            order?.seller_id === session?.user.id && order?.status !== 'CANCELED' && order?.status !== 'DELIVERED' && (
               <>
                 <p className='whitespace-nowrap'>Seller Actions:</p>
                 {order?.status === 'CREATED' && (
@@ -123,9 +123,9 @@ export default async function OrderPage({ params: { orderId } }: { params: { ord
                 {order?.status === 'ACCEPTED' && (
                   <>
                     {
-                      // TODO: Order status is ACCEPTED, seller should give the book to buyer, and set status to DELIVERIED
+                      // TODO: Order status is ACCEPTED, seller should give the book to buyer, and set status to DELIVERED
                     }
-                    <ActionButton type='DELIVERIED' orderId={orderId} />
+                    <ActionButton type='DELIVERED' orderId={orderId} />
                   </>
                 )}
               </>
@@ -147,10 +147,10 @@ export default async function OrderPage({ params: { orderId } }: { params: { ord
                     <ActionButton type='CANCELED' orderId={orderId} />
                   </>
                 )}
-                {order?.status === 'DELIVERIED' && (
+                {order?.status === 'DELIVERED' && (
                   <>
                     {
-                      // TODO: Order status is DELIVERIED, seller could set status to DONE
+                      // TODO: Order status is DELIVERED, seller could set status to DONE
                     }
                     <ActionButton type='DONE' orderId={orderId} />
                   </>

@@ -14,7 +14,7 @@ export const updateOrderStatusAction = async (prevState: any, formData: FormData
     data: { session },
   } = await supabaseByCookie.auth.getSession()
 
-  const type = formData.get('type')?.toString() as 'CANCELED' | 'ACCEPTED' | 'DONE' | 'DELIVERIED'
+  const type = formData.get('type')?.toString() as 'CANCELED' | 'ACCEPTED' | 'DONE' | 'DELIVERED'
   const orderId = formData.get('orderId')?.toString()!
 
   // If action is cancel, set the sell's order_id to null
