@@ -17,11 +17,11 @@ export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname
 
   // Check the pathname, if session is null, redirect user to login
+  // TODO: /api/isbn is not included
   if (
     (pathname.startsWith('/books') ||
       pathname.startsWith('/my') ||
-      pathname.startsWith('/order') ||
-      pathname.startsWith('/api/isbn')) &&
+      pathname.startsWith('/order')) &&
     !session
   ) {
     return NextResponse.redirect(`${getURL()}/login`)
