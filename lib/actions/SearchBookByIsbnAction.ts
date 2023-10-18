@@ -11,7 +11,8 @@ export const searchBookByIsbnAction = async (formData: FormData) => {
   }
 
   // Request the Juhe isbn api
-  const res = await fetch(`${getURL()}/api/isbn/${isbn}`)
+  // Make sure fetch is no-cache
+  const res = await fetch(`${getURL()}/api/isbn/${isbn}`, { cache: 'no-cache' })
   if (res.status != 200) {
     redirect('/books/sell?error=Internal error')
   }
