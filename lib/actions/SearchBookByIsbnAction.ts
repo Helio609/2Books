@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation'
 import { getURL } from '../utils'
 
-export const searchBookByIsbnAction = async (formData: FormData) => {
+export const searchBookByIsbnAction = async (prevState: any, formData: FormData) => {
   const isbn = formData.get('isbn')?.toString().trim()
 
   if (!isbn || isbn.length === 0) {

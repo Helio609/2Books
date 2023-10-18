@@ -1,16 +1,37 @@
 'use client'
 
 import { searchBookByIsbnAction } from '@/lib/actions/SearchBookByIsbnAction'
-import { CameraIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { ArrowPathIcon, CameraIcon, CheckIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { BarcodeDetector, DetectedBarcode } from 'barcode-detector/pure'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 
+// @ts-ignore
+
+// @ts-ignore
+import { useFormState, experimental_useFormStatus as useFormStatus } from 'react-dom'
+
+const initialState = {
+  error: null,
+  done: false,
+}
+
+function SubmitButton() {
+  const { pending } = useFormStatus()
+
+  return (
+    <button disabled={pending} type='submit' className='p-1 rounded-full border-2 border-black border-dashed'>
+      {pending ? <ArrowPathIcon className='w-5 h-5 animate-spin' /> : <MagnifyingGlassIcon className='w-5 h-5' />}
+    </button>
+  )
+}
+
 export default function SearchIsbnForm({ defaultValue }: { defaultValue?: string }) {
   const [imageSrc, setImageSrc] = useState('')
   const [isbn, setIsbn] = useState<string | null>(null)
-
   const [scan, setScan] = useState(false)
+
+  const [state, formAction] = useFormState(searchBookByIsbnAction, initialState)
 
   // Init webcam and capture function
   const webcamRef = useRef<Webcam | null>(null)
@@ -48,7 +69,7 @@ export default function SearchIsbnForm({ defaultValue }: { defaultValue?: string
   return (
     <>
       <form
-        action={searchBookByIsbnAction}
+        action={formAction}
         className='p-2 flex items-center justify-center space-x-2 rounded-lg border-2 border-black border-dashed'
       >
         ISBN:{' '}
@@ -66,9 +87,7 @@ export default function SearchIsbnForm({ defaultValue }: { defaultValue?: string
         >
           <CameraIcon className='w-5 h-5' />
         </button>
-        <button type='submit' className='p-1 rounded-full border-2 border-black border-dashed'>
-          <MagnifyingGlassIcon className='w-5 h-5' />
-        </button>
+        <SubmitButton />
       </form>
       {scan && (
         <>
