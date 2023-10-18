@@ -34,7 +34,7 @@ export default function SearchIsbnForm({ defaultValue }: { defaultValue?: string
   // Init webcam and capture function
   const webcamRef = useRef<Webcam | null>(null)
   const capture = useCallback(() => {
-    const imageSrc = webcamRef.current?.getScreenshot()
+    const imageSrc = webcamRef.current?.getScreenshot({ height: 1080, width: 1920 })
     if (imageSrc) {
       setImageSrc(imageSrc)
     }
