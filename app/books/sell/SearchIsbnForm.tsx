@@ -1,15 +1,13 @@
 'use client'
 
 import { searchBookByIsbnAction } from '@/lib/actions/SearchBookByIsbnAction'
-import { ArrowPathIcon, CameraIcon, CheckIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { ArrowPathIcon, CameraIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { BarcodeDetector, DetectedBarcode } from 'barcode-detector/pure'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 
 // @ts-ignore
-
-// @ts-ignore
-import { useFormState, experimental_useFormStatus as useFormStatus } from 'react-dom'
+import { experimental_useFormState as useFormState, experimental_useFormStatus as useFormStatus } from 'react-dom'
 
 const initialState = {
   error: null,
