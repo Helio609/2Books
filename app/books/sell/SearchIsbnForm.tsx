@@ -8,7 +8,7 @@ import Webcam from 'react-webcam'
 
 export default function SearchIsbnForm({ defaultValue }: { defaultValue?: string }) {
   const [imageSrc, setImageSrc] = useState('')
-  const [isbn, setIsbn] = useState('')
+  const [isbn, setIsbn] = useState<string | null>(null)
 
   const [scan, setScan] = useState(false)
 
@@ -54,7 +54,7 @@ export default function SearchIsbnForm({ defaultValue }: { defaultValue?: string
         ISBN:{' '}
         <input
           name='isbn'
-          defaultValue={defaultValue ?? isbn}
+          defaultValue={isbn ?? defaultValue}
           type='text'
           required
           className='w-32 outline-none border-b-2 border-black border-dashed'
@@ -80,7 +80,7 @@ export default function SearchIsbnForm({ defaultValue }: { defaultValue?: string
             screenshotFormat='image/jpeg'
             videoConstraints={{ facingMode: 'environment' }}
           />
-          <p className='text-center text-sm'>ISBN: {isbn.length == 0 ? 'Detecting...' : isbn}</p>
+          <p className='text-center text-sm'>ISBN: {!isbn || isbn.length == 0 ? 'Detecting...' : isbn}</p>
         </>
       )}
     </>
