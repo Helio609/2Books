@@ -13,7 +13,7 @@
     "@supabase/auth-helpers-nextjs": "^0.8.1",
     "@supabase/supabase-js": "^2.38.1",
     "barcode-detector": "^2.0.3",
-    "next": "13.5.4",
+    "next": "13.5.5",
     "nodemailer": "^6.9.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
