@@ -3,6 +3,7 @@
 import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { getURL, isEduPostfix } from '../utils'
+import { createClient } from '@supabase/supabase-js'
 
 export const loginAction = async (prevState: any, formData: FormData) => {
   const email = formData.get('email')?.toString()
@@ -11,16 +12,24 @@ export const loginAction = async (prevState: any, formData: FormData) => {
   if (!email || email.length === 0 || email.toString().trim() === '') {
     return { error: '请填写正确的邮箱', done: false }
   }
-  
+
   // TODO: Enable it in future
   // if (!isEduPostfix(email)) {
   //   return { error: '只允许@*.edu.cn用户使用', done: false }
   // }
 
-  const supabase = createServerActionClient({ cookies })
+  const supabaseByCookie = createServerActionClient({ cookies })
+
+  const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!)
+
+  // Auto confirm the user first
+  supabase.auth.admin.createUser({
+    email,
+    email_confirm: true,
+  })
 
   // Starting auth, send a email to user
-  const res = await supabase.auth.signInWithOtp({
+  const res = await supabaseByCookie.auth.signInWithOtp({
     email,
     options: {
       // According to server url, setup on supabase auth configuration
