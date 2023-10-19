@@ -16,6 +16,7 @@ export default function SearchBar() {
   const navigateTo = (search?: string) => {
     if (search) {
       searchParams.set('search', search)
+      searchParams.set('page', '1')
     } else {
       searchParams.delete('search')
     }
@@ -25,6 +26,7 @@ export default function SearchBar() {
   const onAvailableChange = (checked: boolean) => {
     if (checked) {
       searchParams.set('available', 'true')
+      searchParams.set('page', '1')
     } else {
       searchParams.delete('available')
     }

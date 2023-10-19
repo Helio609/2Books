@@ -9,7 +9,9 @@ import { sendNotifyMail } from '../mailer'
 
 export const updateOrderStatusAction = async (prevState: any, formData: FormData) => {
   const supabaseByCookie = createServerActionClient<Database>({ cookies })
-  const supabase = createClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!)
+  const supabase = createClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  })
 
   const {
     data: { session },

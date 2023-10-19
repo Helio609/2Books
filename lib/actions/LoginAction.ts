@@ -20,7 +20,9 @@ export const loginAction = async (prevState: any, formData: FormData) => {
 
   const supabaseByCookie = createServerActionClient({ cookies })
 
-  const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!)
+  const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  })
 
   // Auto confirm the user first
   await supabase.auth.admin.createUser({

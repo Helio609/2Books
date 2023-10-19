@@ -152,7 +152,7 @@ export default async function OrderPage({ params: { orderId } }: { params: { ord
             //              modify status to ACCEPT, so the buyer can not cancel the order easily
             //              modify status to DONE
             //       Buyer could cancel the order, when status is not DONE
-            order?.buyer_id === session?.user.id && order?.status !== 'CANCELED' && (
+            order?.buyer_id === session?.user.id && order?.status !== 'CANCELED' && order?.status !== 'DONE' && (
               <>
                 <p className='whitespace-nowrap'>Buyer Actions:</p>
                 {order?.status === 'CREATED' && (

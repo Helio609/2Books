@@ -9,7 +9,9 @@ import { getURL } from '../utils'
 
 export default async function buyAction(prevState: any, formData: FormData) {
   // Because some sql needs high permissions like update and delete
-  const supabase = createClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!)
+  const supabase = createClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  })
   // Using the client to get the user id
   const supabaseByCookie = createServerComponentClient<Database>({ cookies: cookies })
 

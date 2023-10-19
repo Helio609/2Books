@@ -73,6 +73,9 @@ const sendNotifyMail = async ({
       case 'DELIVERED':
         sellerMailOptions.subject += `订单已配送`
         break
+      case 'DONE':
+        sellerMailOptions.subject += `订单已完成`
+        break
       default:
         break
     }
