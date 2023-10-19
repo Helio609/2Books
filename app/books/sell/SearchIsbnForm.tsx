@@ -1,15 +1,13 @@
 'use client'
 
 import { searchBookByIsbnAction } from '@/lib/actions/SearchBookByIsbnAction'
-import { ArrowPathIcon, CameraIcon, CheckIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { ArrowPathIcon, CameraIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { BarcodeDetector, DetectedBarcode } from 'barcode-detector/pure'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 
 // @ts-ignore
-
-// @ts-ignore
-import { useFormState, experimental_useFormStatus as useFormStatus } from 'react-dom'
+import { experimental_useFormState as useFormState, experimental_useFormStatus as useFormStatus } from 'react-dom'
 
 const initialState = {
   error: null,
@@ -36,7 +34,7 @@ export default function SearchIsbnForm({ defaultValue }: { defaultValue?: string
   // Init webcam and capture function
   const webcamRef = useRef<Webcam | null>(null)
   const capture = useCallback(() => {
-    const imageSrc = webcamRef.current?.getScreenshot()
+    const imageSrc = webcamRef.current?.getScreenshot({ height: 1080, width: 1920 })
     if (imageSrc) {
       setImageSrc(imageSrc)
     }
