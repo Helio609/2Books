@@ -26,10 +26,11 @@ export default async function BookPage(request: { searchParams: any }) {
 
   const { data: books, error } = await supabase
     .from('books')
-    .select(`id, sells(id)`)
+    .select(`id, sells!inner(order_id)`)
     .like('title', search)
     // TODO: This will cause a problem that only tow type of books will be shown in same query
-    .filter('sells', Boolean(request.searchParams.available) ? 'not.is' : 'is', null)
+    // .filter('sells', Boolean(request.searchParams.available) ? 'not.is' : 'is', null)
+    .filter('sells.order_id', Boolean(request.searchParams.available) ? 'is' : 'not.is', null)
     .range(offset, offset + count - 1)
 
   if (error) {
