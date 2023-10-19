@@ -23,7 +23,7 @@ export const loginAction = async (prevState: any, formData: FormData) => {
   const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!)
 
   // Auto confirm the user first
-  supabase.auth.admin.createUser({
+  await supabase.auth.admin.createUser({
     email,
     email_confirm: true,
   })
