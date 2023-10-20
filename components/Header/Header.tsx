@@ -15,7 +15,7 @@ export default async function Header() {
 
   if (!session?.user || sessionError) {
     return (
-      <div className='flex container mx-auto justify-center items-center h-12 my-4 rounded-xl border-2 border-dashed border-black'>
+      <div className='flex container mx-auto justify-center items-center h-12 rounded-xl border-2 border-dashed border-black'>
         <Link href='/' className='text-2xl'>
           Welcome to 2books!
         </Link>
@@ -24,7 +24,7 @@ export default async function Header() {
   }
 
   return (
-    <div className='flex p-2 justify-between container mx-auto items-center my-4 rounded-xl border-2 border-dashed border-black'>
+    <div className='flex p-2 justify-between container mx-auto items-center rounded-xl border-2 border-dashed border-black'>
       <div className='flex flex-col items-center'>
         <Link href='/' className='text-2xl'>
           Welcome to 2books!
