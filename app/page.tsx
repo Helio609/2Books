@@ -37,20 +37,18 @@ export default async function Home() {
       {session && (
         <>
           <div className='flex flex-1 space-x-4 justify-center items-center'>
-            <Link
-              as='/books'
+            <a
               href='/books'
               className='shadow-lg bg-gradient-to-b from-gray-50 to-gray-200 hover:text-gray-500 p-2 md:p-4 rounded-lg border-2 border-black border-dashed'
             >
               挑选书籍
-            </Link>
-            <Link
-              as='/books/sell'
+            </a>
+            <a
               href='/books/sell'
               className='shadow-lg bg-gradient-to-l from-gray-50 to-gray-200 hover:text-gray-500 p-2 md:p-4 rounded-lg border-2 border-black border-dashed'
             >
               发布信息
-            </Link>
+            </a>
           </div>
           <p className='text-center'>技术支持: support@2books.top</p>
         </>
