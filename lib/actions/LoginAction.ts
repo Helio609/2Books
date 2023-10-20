@@ -24,11 +24,25 @@ export const loginAction = async (prevState: any, formData: FormData) => {
     auth: { persistSession: false, autoRefreshToken: false },
   })
 
-  // Auto confirm the user first
-  await supabase.auth.admin.createUser({
-    email,
-    email_confirm: true,
-  })
+  const { data: mayExistUser, error: mayExistUserError } = await supabase
+    .schema('auth')
+    .from('users')
+    .select()
+    .eq('email', email)
+    .maybeSingle()
+
+  if (mayExistUserError) {
+    return { message: mayExistUserError.message, done: false }
+  }
+
+  // If user not exist
+  if (!mayExistUser) {
+    // Auto confirm the user first
+    await supabase.auth.admin.createUser({
+      email,
+      email_confirm: true,
+    })
+  }
 
   // Starting auth, send a email to user
   const res = await supabaseByCookie.auth.signInWithOtp({

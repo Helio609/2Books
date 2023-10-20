@@ -54,6 +54,37 @@ export interface Database {
         }
         Relationships: []
       }
+      ebooks: {
+        Row: {
+          book_id: string
+          created_at: string
+          id: number
+          status: Database["public"]["Enums"]["EbookStatus"]
+          url: string
+        }
+        Insert: {
+          book_id: string
+          created_at?: string
+          id?: number
+          status?: Database["public"]["Enums"]["EbookStatus"]
+          url: string
+        }
+        Update: {
+          book_id?: string
+          created_at?: string
+          id?: number
+          status?: Database["public"]["Enums"]["EbookStatus"]
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ebooks_book_id_fkey"
+            columns: ["book_id"]
+            referencedRelation: "books"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       orders: {
         Row: {
           buyer_id: string
@@ -61,7 +92,7 @@ export interface Database {
           id: string
           sell_id: string | null
           seller_id: string
-          status: string | null
+          status: Database["public"]["Enums"]["OrderStatus"] | null
         }
         Insert: {
           buyer_id: string
@@ -69,7 +100,7 @@ export interface Database {
           id?: string
           sell_id?: string | null
           seller_id: string
-          status?: string | null
+          status?: Database["public"]["Enums"]["OrderStatus"] | null
         }
         Update: {
           buyer_id?: string
@@ -77,7 +108,7 @@ export interface Database {
           id?: string
           sell_id?: string | null
           seller_id?: string
-          status?: string | null
+          status?: Database["public"]["Enums"]["OrderStatus"] | null
         }
         Relationships: [
           {
@@ -203,7 +234,8 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      EbookStatus: "UNCHECKED" | "CHECKED"
+      OrderStatus: "CREATED" | "ACCEPTED" | "DELIVERED" | "DONE" | "CANCELED"
     }
     CompositeTypes: {
       [_ in never]: never
