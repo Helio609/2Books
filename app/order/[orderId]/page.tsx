@@ -124,28 +124,31 @@ export default async function OrderPage({ params: { orderId } }: { params: { ord
             //              modify status to ACCEPTED, so the buyer can not cancel the order easily
             //              modify status to DONE
             //       Buyer could cancel the order, when status is not DONE
-            order?.seller_id === session?.user.id && order?.status !== 'CANCELED' && order?.status !== 'DELIVERED' && (
-              <>
-                <p className='whitespace-nowrap'>Seller Actions:</p>
-                {order?.status === 'CREATED' && (
-                  <>
-                    {
-                      // TODO: Order status is CREATED, seller could accept or cancel the order
-                    }
-                    <ActionButton type='CANCELED' orderId={orderId} />
-                    <ActionButton type='ACCEPTED' orderId={orderId} />
-                  </>
-                )}
-                {order?.status === 'ACCEPTED' && (
-                  <>
-                    {
-                      // TODO: Order status is ACCEPTED, seller should give the book to buyer, and set status to DELIVERED
-                    }
-                    <ActionButton type='DELIVERED' orderId={orderId} />
-                  </>
-                )}
-              </>
-            )
+            order?.seller_id === session?.user.id &&
+              order?.status !== 'CANCELED' &&
+              order?.status !== 'DELIVERED' &&
+              order?.status !== 'DONE' && (
+                <>
+                  <p className='whitespace-nowrap'>Seller Actions:</p>
+                  {order?.status === 'CREATED' && (
+                    <>
+                      {
+                        // TODO: Order status is CREATED, seller could accept or cancel the order
+                      }
+                      <ActionButton type='CANCELED' orderId={orderId} />
+                      <ActionButton type='ACCEPTED' orderId={orderId} />
+                    </>
+                  )}
+                  {order?.status === 'ACCEPTED' && (
+                    <>
+                      {
+                        // TODO: Order status is ACCEPTED, seller should give the book to buyer, and set status to DELIVERED
+                      }
+                      <ActionButton type='DELIVERED' orderId={orderId} />
+                    </>
+                  )}
+                </>
+              )
           }
           {
             // TODO: Seller could cancel the order

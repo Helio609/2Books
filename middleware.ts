@@ -1,7 +1,6 @@
 import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
-import { NextResponse } from 'next/server'
-
 import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 import { getURL } from './lib/utils'
 
 export async function middleware(req: NextRequest) {
@@ -10,7 +9,7 @@ export async function middleware(req: NextRequest) {
 
   // Refreshing it if necessary.
   const {
-    data: { session },
+    data: { session }
   } = await supabase.auth.getSession()
 
   // Route protection
