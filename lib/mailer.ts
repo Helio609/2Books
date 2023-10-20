@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import nodemailer from 'nodemailer'
-import { Database } from './supabase.types'
 import Mail from 'nodemailer/lib/mailer'
+import { Database } from './supabase.types'
 import { getURL } from './utils'
 
 const mailer = nodemailer.createTransport({
@@ -47,14 +47,14 @@ const sendNotifyMail = async ({
 
   const sellerMailOptions: Mail.Options = {
     to: sellerEmail ?? '',
-    from: process.env.SMTP_USER,
+    from: '2Books',
     subject: `2Books | ${bookName} | `,
     html: `<a href="${getURL()}/order/${order.id}">点击查看</a>`,
   }
 
   const buyerMailOptions: Mail.Options = {
     to: buyerEmail ?? '',
-    from: process.env.SMTP_USER,
+    from: '2Books',
     subject: `2Books | ${bookName} | `,
     html: `<a href="${getURL()}/order/${order.id}">点击查看</a>`,
   }
@@ -105,3 +105,4 @@ const sendNotifyMail = async ({
 }
 
 export { mailer, sendNotifyMail }
+
