@@ -7,7 +7,7 @@ import UpdateProfileButton from './UpdateProfileButton'
 
 export const dynamic = 'force-dynamic'
 
-export default async function MyPage() {
+export default async function MyPage(req: { searchParams: { message?: string } }) {
   const supabase = createServerComponentClient<Database>({ cookies })
 
   const {
@@ -32,24 +32,51 @@ export default async function MyPage() {
   return (
     <>
       <p className='text-2xl'>Profile</p>
+      {req.searchParams.message && <p className='text-red-500 text-md'>{req.searchParams.message}</p>}
       <form action={updateProfileAction} className='flex flex-col justify-center space-y-2'>
         <div className='grid grid-cols-1 sm:grid-cols-2 gap-2'>
           <span className='p-2 rounded-lg border-2 border-black border-dashed'>
             University:{' '}
             <input
+              placeholder='Required'
               name='university'
               defaultValue={profile?.university ?? ''}
               type='text'
               className='outline-none border-b-2 border-black border-dashed'
+              required
             />
           </span>
           <span className='p-2 rounded-lg border-2 border-black border-dashed'>
             Campus:{' '}
             <input
+              placeholder='Required'
               name='campus'
               defaultValue={profile?.campus ?? ''}
               type='text'
               className='outline-none border-b-2 border-black border-dashed'
+              required
+            />
+          </span>
+          <span className='p-2 rounded-lg border-2 border-black border-dashed'>
+            Academy:{' '}
+            <input
+              placeholder='Required'
+              name='academy'
+              defaultValue={profile?.academy ?? ''}
+              type='text'
+              className='outline-none border-b-2 border-black border-dashed'
+              required
+            />
+          </span>
+          <span className='p-2 rounded-lg border-2 border-black border-dashed'>
+            Notify Email:{' '}
+            <input
+              placeholder='Required'
+              name='notify_email'
+              defaultValue={profile?.notify_email ?? ''}
+              type='email'
+              className='outline-none border-b-2 border-black border-dashed'
+              required
             />
           </span>
           <span className='p-2 rounded-lg border-2 border-black border-dashed'>
@@ -60,24 +87,6 @@ export default async function MyPage() {
               type='number'
               min={2000}
               max={2100}
-              className='outline-none border-b-2 border-black border-dashed'
-            />
-          </span>
-          <span className='p-2 rounded-lg border-2 border-black border-dashed'>
-            Academy:{' '}
-            <input
-              name='academy'
-              defaultValue={profile?.academy ?? ''}
-              type='text'
-              className='outline-none border-b-2 border-black border-dashed'
-            />
-          </span>
-          <span className='p-2 rounded-lg border-2 border-black border-dashed'>
-            Notify Email:{' '}
-            <input
-              name='notify_email'
-              defaultValue={profile?.notify_email ?? ''}
-              type='email'
               className='outline-none border-b-2 border-black border-dashed'
             />
           </span>
