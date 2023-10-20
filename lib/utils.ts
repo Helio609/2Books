@@ -15,3 +15,15 @@ export const getURL = () => {
 export const isEduPostfix = (email: string) => {
   return /edu.cn$/.test(email)
 }
+
+export const isNecessaryInfoExist = (profile: any) => {
+  return (
+    profile.university &&
+    profile.campus &&
+    profile.academy &&
+    profile.notify_email &&
+    profile.university.length !== 0 &&
+    profile.campus.length !== 0 &&
+    profile.notify_email.length !== 0
+  )
+}

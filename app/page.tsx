@@ -1,18 +1,29 @@
+import { Database } from '@/lib/supabase.types'
+import { isNecessaryInfoExist } from '@/lib/utils'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
 export const dynamic = 'force-dynamic'
 
 export default async function Home() {
-  const supabase = createServerComponentClient({ cookies })
+  const supabase = createServerComponentClient<Database>({ cookies })
 
   const {
     data: { session },
-    error,
+    error: sessionError,
   } = await supabase.auth.getSession()
 
-  // TODO: Handle get session error
+  if (sessionError || !session) {
+    redirect(`/auth/error?message=${sessionError?.message ? sessionError?.message : 'Session is null'}`)
+  }
+
+  const { data: profile, error: profileError } = await supabase
+    .from('profiles')
+    .select('university, campus, academy, notify_email')
+    .eq('id', session!.user.id)
+    .single()
 
   return (
     <>
@@ -24,6 +35,7 @@ export default async function Home() {
         &nbsp;&nbsp;&nbsp;&nbsp;咱不就来了吗？感谢您千辛万苦成功登录此网站，接下来请您简单地设置一些必要的信息，以方便他人交流。
         或者选择作为信息的接收方，挑选所需要的，并通过该网站方便地联系对方，达到所需。
       </p>
+      {!isNecessaryInfoExist(profile) && <p className='text-red-500'>&nbsp;&nbsp;&nbsp;&nbsp;更新个人信息以开始！</p>}
       {!session && (
         <div className='flex flex-1 space-x-4 justify-center items-center'>
           <Link

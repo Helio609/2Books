@@ -2,7 +2,7 @@ import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { Database } from './lib/supabase.types'
-import { getURL } from './lib/utils'
+import { getURL, isNecessaryInfoExist } from './lib/utils'
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next()
@@ -34,15 +34,7 @@ export async function middleware(req: NextRequest) {
       return NextResponse.redirect(`${getURL()}/auth/error?message=${profileError.message}`)
     }
 
-    if (
-      !profile.university ||
-      !profile.campus ||
-      !profile.academy ||
-      !profile.notify_email ||
-      profile.university.length === 0 ||
-      profile.campus.length === 0 ||
-      profile.notify_email.length === 0
-    ) {
+    if (!isNecessaryInfoExist(profile)) {
       return NextResponse.redirect(`${getURL()}/my?message=Update your profile first`)
     }
   }
