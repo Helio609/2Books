@@ -1,11 +1,10 @@
-import { BookCard, Pagination, SearchBar } from '@/components'
+import { BookCard, LoadingBookCard, Pagination, SearchBar } from '@/components'
 import { Database } from '@/lib/supabase.types'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
 import Loading from '../loading'
-import LoadingBookCard from '@/components/BookCard/LoadingBookCard'
 
 export const dynamic = 'force-dynamic'
 

@@ -1,6 +1,6 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
-import BuyForm from './BuyForm'
+import BuyForm from '../BuyForm/BuyForm'
 import { Database } from '@/lib/supabase.types'
 
 export default async function SellCard({ sellId }: { sellId: string }) {

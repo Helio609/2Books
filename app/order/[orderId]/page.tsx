@@ -1,8 +1,8 @@
+import { OrderActionForm } from '@/components'
 import { Database } from '@/lib/supabase.types'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
-import ActionButton from './OrderActionForm'
 
 export const dynamic = 'force-dynamic'
 
@@ -135,8 +135,8 @@ export default async function OrderPage({ params: { orderId } }: { params: { ord
                       {
                         // TODO: Order status is CREATED, seller could accept or cancel the order
                       }
-                      <ActionButton type='CANCELED' orderId={orderId} />
-                      <ActionButton type='ACCEPTED' orderId={orderId} />
+                      <OrderActionForm type='CANCELED' orderId={orderId} />
+                      <OrderActionForm type='ACCEPTED' orderId={orderId} />
                     </>
                   )}
                   {order?.status === 'ACCEPTED' && (
@@ -144,7 +144,7 @@ export default async function OrderPage({ params: { orderId } }: { params: { ord
                       {
                         // TODO: Order status is ACCEPTED, seller should give the book to buyer, and set status to DELIVERED
                       }
-                      <ActionButton type='DELIVERED' orderId={orderId} />
+                      <OrderActionForm type='DELIVERED' orderId={orderId} />
                     </>
                   )}
                 </>
@@ -163,7 +163,7 @@ export default async function OrderPage({ params: { orderId } }: { params: { ord
                     {
                       // TODO: Order status is CREATED, buyer could cancel the order
                     }
-                    <ActionButton type='CANCELED' orderId={orderId} />
+                    <OrderActionForm type='CANCELED' orderId={orderId} />
                   </>
                 )}
                 {order?.status === 'DELIVERED' && (
@@ -171,7 +171,7 @@ export default async function OrderPage({ params: { orderId } }: { params: { ord
                     {
                       // TODO: Order status is DELIVERED, seller could set status to DONE
                     }
-                    <ActionButton type='DONE' orderId={orderId} />
+                    <OrderActionForm type='DONE' orderId={orderId} />
                   </>
                 )}
               </>

@@ -1,6 +1,6 @@
 import { BookCard } from '@/components'
-import SearchIsbnForm from './SearchIsbnForm'
-import SellForm from './SellForm'
+import SearchIsbnForm from '../../../components/SearchIsbnForm/SearchIsbnForm'
+import SellForm from '../../../components/SellForm/SellForm'
 
 export const dynamic = 'force-dynamic'
 

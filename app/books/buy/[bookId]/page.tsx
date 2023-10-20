@@ -1,11 +1,10 @@
 import Loading from '@/app/loading'
+import { LoadingSellForm, SellCard } from '@/components'
 import { Database } from '@/lib/supabase.types'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import Image from 'next/image'
 import { Suspense } from 'react'
-import LoadingSellForm from '../../sell/LoadingSellForm'
-import SellCard from './SellCard'
 
 export const dynamic = 'force-dynamic'
 
@@ -46,7 +45,9 @@ export default async function BookSellPage({ params: { bookId } }: { params: { b
           />
           <div className='flex flex-col'>
             <p className='text-md text-center truncate'>《{book?.title}》</p>
-            {book?.subtitle && book?.subtitle != '' && <p className='text-sm text-center truncate'>- {book?.subtitle}</p>}
+            {book?.subtitle && book?.subtitle != '' && (
+              <p className='text-sm text-center truncate'>- {book?.subtitle}</p>
+            )}
             <p className='text-sm text-gray-500 truncate'>Author: &nbsp;&nbsp;&nbsp;{book?.author}</p>
             <p className='text-sm text-gray-500 truncate'>Publisher: {book?.publisher}</p>
             <p className='text-sm text-gray-500 truncate'>Pubdate: &nbsp;&nbsp;{book?.pubdate}</p>

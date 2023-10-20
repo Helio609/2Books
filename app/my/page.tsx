@@ -1,9 +1,9 @@
+import { UpdateProfileButton } from '@/components'
 import { updateProfileAction } from '@/lib/actions/UpdateProfileAction'
 import { Database } from '@/lib/supabase.types'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
-import UpdateProfileButton from './UpdateProfileButton'
 
 export const dynamic = 'force-dynamic'
 
