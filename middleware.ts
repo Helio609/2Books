@@ -31,7 +31,7 @@ export async function middleware(req: NextRequest) {
       .single()
 
     if (profileError) {
-      return NextResponse.redirect(`${getURL()}/auth/error?message=${profileError.message}`)
+      return NextResponse.rewrite(`${getURL()}/auth/error?message=${profileError.message}`)
     }
 
     if (
@@ -43,7 +43,7 @@ export async function middleware(req: NextRequest) {
       profile.campus.length === 0 ||
       profile.notify_email.length === 0
     ) {
-      return NextResponse.redirect(`${getURL()}/my?message=Update your profile first`)
+      return NextResponse.rewrite(`${getURL()}/my?message=Update your profile first`)
     }
   }
 

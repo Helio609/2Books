@@ -41,5 +41,7 @@ export const updateProfileAction = async (formData: FormData) => {
     return { error: error.message, done: false }
   }
 
+  revalidatePath('/')
+
   return { done: true }
 }
