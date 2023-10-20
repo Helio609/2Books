@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='zh-CN' className={chineseFont.className}>
       <body>
-        <div className='flex flex-col h-[calc(100dvh)]'>
+        <div className='flex flex-col h-[calc(100dvh)] m-2 sm:m-0'>
           <Header />
           <main className='overflow-y-scroll container mx-auto p-2 flex flex-col flex-1 rounded-xl border-2 border-black border-dashed'>
             <Suspense fallback={<Loading />}>{children}</Suspense>
