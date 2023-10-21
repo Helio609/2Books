@@ -32,7 +32,7 @@ export const loginAction = async (prevState: any, formData: FormData) => {
     .maybeSingle()
 
   if (mayExistUserError) {
-    return { message: mayExistUserError.message, done: false }
+    return { error: mayExistUserError.message, done: false }
   }
 
   // If user not exist
